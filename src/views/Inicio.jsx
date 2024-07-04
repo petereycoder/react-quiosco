@@ -1,12 +1,17 @@
-import { productos } from "../data/productos"
+import { productos as data, productos } from "../data/productos"
 import Producto from "../components/Producto";
+import useQuiosco from "../hooks/useQuiosco";
 
-console.log(productos);
 
 export default function Inicio() {
+
+  const { categoriaActual } = useQuiosco()
+
+  const productos = data.filter(producto => producto.categoria_id === categoriaActual.id)
+
   return (
     <>
-      <h1 className="text-4xl font-black">Inicio</h1>
+      <h1 className="text-4xl font-black">{categoriaActual.nombre}</h1>
       <p className="text-2xl my-10">
         Elije y personaliza tu pedido a continuación.
       </p>
