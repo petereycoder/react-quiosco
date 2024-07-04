@@ -5,8 +5,6 @@ import useQuiosco from "../hooks/useQuiosco";
 
 export default function Inicio() {
 
-  const { auntenticado } = useQuiosco()
- console.log(auntenticado);
   return (
     <>
       <h1 className="text-4xl font-black">Inicio</h1>
