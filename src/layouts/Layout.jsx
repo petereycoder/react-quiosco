@@ -38,8 +38,7 @@ export default function Layout() {
       <Modal isOpen={modal} style={customStyles}>
         <ModalProducto />   
       </Modal>
-    
-
+      
     </>
   )
 }
