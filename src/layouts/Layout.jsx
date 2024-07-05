@@ -2,6 +2,7 @@ import { Outlet } from 'react-router-dom'
 import Modal from 'react-modal'
 import Sidebar from '../components/Sidebar'
 import Resumen from '../components/Resumen'
+import ModalProducto from '../components/ModalProducto'
 import useQuiosco from '../hooks/useQuiosco'
 
 export default function Layout() {
@@ -17,6 +18,7 @@ export default function Layout() {
     },
   };
 
+  Modal.setAppElement('#root');
 
   const { modal, handleClickModal } = useQuiosco();
   console.log(modal)
@@ -33,13 +35,8 @@ export default function Layout() {
       <Resumen />
     </div>
 
-      <Modal isOpen={modal} style={customStyles} appElement={document.getElementById("root")}>
-        <p>Desde Modal</p>
-        <button
-          onClick={handleClickModal}
-        >
-          Cerrar</button>
-          
+      <Modal isOpen={modal} style={customStyles}>
+        <ModalProducto />   
       </Modal>
     
 
