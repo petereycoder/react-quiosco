@@ -23,6 +23,10 @@ const QuioscoProvider = ({children}) => {
     const handleSetProducto = producto => {
         setProducto(producto)
     }
+
+    const handleAgregarPedido = ({categoria_id, imagen,id, ...producto}) => {
+        setPedido([...pedido, producto])
+    }
     
     return (
         <QuioscoContext.Provider
@@ -34,7 +38,8 @@ const QuioscoProvider = ({children}) => {
                 handleClickModal,
                 producto,
                 handleSetProducto,
-                pedido
+                pedido,
+                handleAgregarPedido
             }}
         >
             {children}
