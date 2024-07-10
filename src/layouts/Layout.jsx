@@ -20,8 +20,7 @@ export default function Layout() {
 
   Modal.setAppElement('#root');
 
-  const { modal, handleClickModal } = useQuiosco();
-  console.log(modal)
+  const { modal } = useQuiosco();
 
   return (
     <>
