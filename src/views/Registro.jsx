@@ -55,7 +55,7 @@ export default function Registro() {
                         placeholder="Tu nombre"
                         ref={nameRef}
                     />
-                    {errores ?  <Alerta errors={errores} filtro="name"></Alerta> : null}
+                    <Alerta errors={errores} filtro="nombre"></Alerta>
                    
                 </div>
 
@@ -74,7 +74,7 @@ export default function Registro() {
                         placeholder="Tu Email"
                         ref={emailRef}
                     />
-                    <Alerta errors={errores} filtro="email"></Alerta>
+                    <Alerta errors={errores} filtro="correo electrónico"></Alerta>
                 </div>
 
                 
@@ -93,7 +93,7 @@ export default function Registro() {
                         placeholder="Tu Password"
                         ref={passwordRef}
                     />
-                    <Alerta errors={errores} filtro="password"></Alerta>
+                    <Alerta errors={errores} filtro="contraseña"></Alerta>
                 </div>
 
                 <div className="mb-4">
