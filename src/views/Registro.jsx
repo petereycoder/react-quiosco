@@ -1,6 +1,7 @@
 import { createRef, useState } from 'react'
 import { Link } from 'react-router-dom'
 import clienteAxios from "../config/axios";
+import Alerta from '../components/Alerta';
 
 export default function Registro() {
 
@@ -8,6 +9,8 @@ export default function Registro() {
     const emailRef = createRef();
     const passwordRef = createRef();
     const passwordConfirmationRef = createRef();
+
+    const [errores, setErrores] = useState([])
 
     const handleSubmit = async e => {
         e.preventDefault();
@@ -20,9 +23,9 @@ export default function Registro() {
         }
         try {
             const respuesta = await clienteAxios.post('/api/registro', datos)
-            console.log(respuesta)
+            setErrores(null);
         } catch (error) {
-            console.log(error)
+            setErrores(Object.values(error.response.data.errors))
         }
     }
 
@@ -34,7 +37,9 @@ export default function Registro() {
         <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
             <form
                 onSubmit={handleSubmit}
+                noValidate
             >
+        
                 <div className="mb-4">
                     <label
                         className="text-slate-800"
@@ -50,6 +55,8 @@ export default function Registro() {
                         placeholder="Tu nombre"
                         ref={nameRef}
                     />
+                    {errores ?  <Alerta errors={errores} filtro="name"></Alerta> : null}
+                   
                 </div>
 
                 <div className="mb-4">
@@ -67,6 +74,7 @@ export default function Registro() {
                         placeholder="Tu Email"
                         ref={emailRef}
                     />
+                    <Alerta errors={errores} filtro="email"></Alerta>
                 </div>
 
                 
@@ -85,6 +93,7 @@ export default function Registro() {
                         placeholder="Tu Password"
                         ref={passwordRef}
                     />
+                    <Alerta errors={errores} filtro="password"></Alerta>
                 </div>
 
                 <div className="mb-4">
