@@ -1,13 +1,45 @@
+import { createRef, useState } from 'react'
 import { Link } from 'react-router-dom'
+import clienteAxios from "../config/axios";
+import Alerta from '../components/Alerta';
 
 export default function Registro() {
+
+    const nameRef = createRef();
+    const emailRef = createRef();
+    const passwordRef = createRef();
+    const passwordConfirmationRef = createRef();
+
+    const [errores, setErrores] = useState([])
+
+    const handleSubmit = async e => {
+        e.preventDefault();
+
+        const datos = {
+            name: nameRef.current.value,
+            email: emailRef.current.value,
+            password: passwordRef.current.value,
+            password_confirmation: passwordConfirmationRef.current.value
+        }
+        try {
+            const respuesta = await clienteAxios.post('/api/registro', datos)
+            setErrores(null);
+        } catch (error) {
+            setErrores(Object.values(error.response.data.errors))
+        }
+    }
+
   return (
     <>
         <h1 className="text-4xl font-black">Crea tu cuenta</h1>
         <p>Crea tu Cuenta llenando el formulario</p>
 
         <div className="bg-white shadow-md rounded-md mt-10 px-5 py-10">
-            <form>
+            <form
+                onSubmit={handleSubmit}
+                noValidate
+            >
+        
                 <div className="mb-4">
                     <label
                         className="text-slate-800"
@@ -21,7 +53,10 @@ export default function Registro() {
                         className="mt-2 w-full p-3 bg-gray-50"
                         name="name"
                         placeholder="Tu nombre"
+                        ref={nameRef}
                     />
+                    <Alerta errors={errores} filtro="nombre"></Alerta>
+                   
                 </div>
 
                 <div className="mb-4">
@@ -37,7 +72,9 @@ export default function Registro() {
                         className="mt-2 w-full p-3 bg-gray-50"
                         name="email"
                         placeholder="Tu Email"
+                        ref={emailRef}
                     />
+                    <Alerta errors={errores} filtro="correo electrónico"></Alerta>
                 </div>
 
                 
@@ -54,7 +91,9 @@ export default function Registro() {
                         className="mt-2 w-full p-3 bg-gray-50"
                         name="password"
                         placeholder="Tu Password"
+                        ref={passwordRef}
                     />
+                    <Alerta errors={errores} filtro="contraseña"></Alerta>
                 </div>
 
                 <div className="mb-4">
@@ -70,6 +109,7 @@ export default function Registro() {
                         className="mt-2 w-full p-3 bg-gray-50"
                         name="password_confirmation"
                         placeholder="Repetir Password"
+                        ref={passwordConfirmationRef}
                     />
                 </div>
 
