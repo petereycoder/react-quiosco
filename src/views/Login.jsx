@@ -19,7 +19,7 @@ export default function Login() {
         }
         try {
             const { data } = await clienteAxios.post('/api/login', datos)
-            console.log(data.token)
+            localStorage.setItem('AUTH_TOKEN', data.token);
             setErrores(null);
         } catch (error) {
             setErrores(Object.values(error.response.data.errors))
@@ -37,6 +37,7 @@ export default function Login() {
                 onSubmit={handleSubmit}
                 noValidate
             >
+                <Alerta errors={errores} filtro="sinfiltro"></Alerta>
                 <div className="mb-4">
                     <label
                         className="text-slate-800"
@@ -52,6 +53,7 @@ export default function Login() {
                         placeholder="Tu Email"
                         ref={emailRef}
                     />
+                    <Alerta errors={errores} filtro="correo electrónico"></Alerta>
                 </div>
 
                 
@@ -70,6 +72,7 @@ export default function Login() {
                         placeholder="Tu Password"
                         ref={passwordRef}
                     />
+                    <Alerta errors={errores} filtro="contraseña"></Alerta>
                 </div>
 
                 <input
