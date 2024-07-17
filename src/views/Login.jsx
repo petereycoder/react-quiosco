@@ -52,6 +52,7 @@ export default function Login() {
                         placeholder="Tu Email"
                         ref={emailRef}
                     />
+                    <Alerta errors={errores} filtro="correo electrónico"></Alerta>
                 </div>
 
                 
@@ -70,6 +71,7 @@ export default function Login() {
                         placeholder="Tu Password"
                         ref={passwordRef}
                     />
+                    <Alerta errors={errores} filtro="contraseña"></Alerta>
                 </div>
 
                 <input
