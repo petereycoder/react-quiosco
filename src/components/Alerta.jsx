@@ -5,7 +5,13 @@ export default function Alerta({errors, filtro}) {
     arr.forEach(element => {
         element.forEach(m => {
             if(m.includes(filtro)){
-                error = m
+                if(filtro === 'sinfiltro'){
+                    let cad = m.replace("sinfiltro", '');
+                    error = cad
+                }else{
+                    error = m
+                }
+            }else{
             }
         });
     });

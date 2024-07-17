@@ -37,6 +37,7 @@ export default function Login() {
                 onSubmit={handleSubmit}
                 noValidate
             >
+                <Alerta errors={errores} filtro="sinfiltro"></Alerta>
                 <div className="mb-4">
                     <label
                         className="text-slate-800"
